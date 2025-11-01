@@ -1,0 +1,188 @@
+
+==== AssembleHDL ====
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 291, in _print_assembly_error()
+>         AssembleHDL()(top)
+HDL error: 'Rebuild(_Unknown_)' has already been assembled.
+- Cannot assemble the top module from an assembled object.
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 198, in construct()
+>             self.child = CircuitObject()
+HDL error: Cannot overwrite attribute 'child'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 211, in reassign()
+>             self.child = CircuitObject()
+HDL error: Cannot overwrite attribute 'child'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 220, in build_all()
+>             self.child = 1
+HDL error: Cannot overwrite attribute 'child'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 228, in build_child()
+>             self.child = CircuitObject()
+HDL error: Cannot overwrite attribute 'child'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 240, in build_all()
+>             self.assemble = Logic()
+HDL error: Cannot overwrite callable attribute 'assemble'.
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 252, in build_all()
+>             self.child = self.out_obj
+HDL error: 'CircuitObject(out_obj)' has already been assembled.
+- Creating an alias for a circuit object?
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 266, in alias()
+>             self.child1 = self.child
+HDL error: 'CircuitObject(child)' has already been assembled.
+- Creating an alias for a circuit object?
+
+> File 'comopy-dev/comopy/hdl/tests/assemble_hdl_test.py', line 276, in build_sub()
+>             self.child = CircuitObject()
+HDL error: Cannot overwrite attribute 'child'.
+- Calling one builder in another builder?
+
+==== Module ====
+
+HDL error: Tagged ClassBuilder.builder is not a function.
+- Tagged method for builder or behavior must be a function.
+
+HDL error: Tagged Redefined.build_ports() is not current Redefined.build_ports().
+- Class Redefined or method Redefined.build_ports() was redefined?
+
+HDL error: Tagged Redefined.build_ports() is not found in Redefined.
+- Class Redefined was redefined?
+
+HDL error: Tagged DupBlock.update() is not current DupBlock.update().
+- Class DupBlock or method DupBlock.update() was redefined?
+
+HDL error: Tagged methods in PropertyName cannot override RawModule names: all_ports
+
+HDL error: Tagged methods in ClassAttr cannot override RawModule names: _auto_ports
+
+HDL error: Tagged methods in AttrName cannot override RawModule names: _simulator
+
+HDL error: Tagged methods in ClassMethod cannot override RawModule names: get_comb_blocks
+
+HDL error: Tagged methods in MethodName cannot override RawModule names: connect_submodule
+
+HDL error: Tagged methods in ConnBuilder cannot override RawModule names: _connect_submodule_port
+
+HDL error: Duplicated auto port names in module DupAutoPorts: clk, rst_n
+
+> File 'comopy-dev/comopy/hdl/tests/raw_module_test.py', line 447, in build_all()
+>             s.in2 = Input(8).input()
+HDL error: Cannot change signal direction.
+
+> File 'comopy-dev/comopy/hdl/tests/raw_module_test.py', line 468, in build_all()
+>             s.sub = Sub(s.in1, s.in2, s.out, s.out)
+HDL error: Sub() expects 3 port arguments, got 4.
+
+> File 'comopy-dev/comopy/hdl/tests/raw_module_test.py', line 479, in build_all()
+>             s.sub = Sub(a=s.in1, b=s.in2, y=s.out)
+HDL error: Invalid port name 'y' in Sub().
+
+> File 'comopy-dev/comopy/hdl/tests/raw_module_test.py', line 490, in build_all()
+>             s.sub = Sub(s.in1, b=s.in2, x=s.out)
+HDL error: Sub() cannot mix ordered and named port connections.
+
+> File 'comopy-dev/comopy/hdl/tests/module_test.py', line 127, in build_sub()
+>             s.clk = Input()
+HDL error: Cannot overwrite attribute 'clk'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/module_test.py', line 138, in build_all()
+>             s.sub = Sub(clk=s.clk)
+HDL error: Port 'clk' has been auto-connected.
+
+==== Connectable ====
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 213, in connect()
+>             s.out /= 0
+HDL error: /= (blocking assignment) is a simulation-time API.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 222, in connect()
+>             s.out <<= 0
+HDL error: <<= (nonblocking assignment) is a simulation-time API.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 232, in connect()
+>             s.out @= s.in1
+HDL error: Width mismatch for assignment: LHS Bits4, RHS Bits8.
+- Use .ext(width), .S.ext(width), or slice [:width] to match widths.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 247, in connect()
+>             s.out @= s.in1
+HDL error: Multiple drivers are not allowed for 'Wire'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 258, in connect()
+>             s.out[4:] @= s.in1[4:]
+HDL error: Multiple drivers are not allowed for 'SignalSlice'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 271, in connect()
+>             s.out @= s.in1
+HDL error: Multiple drivers are not allowed for 'Wire'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 281, in connect()
+>             cat(s.out[:4], s.out[2:])[:] @= cat(rep(2, s.in1[7]), s.in1)
+HDL error: Cannot assign to Bits10: immutable Bits10.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 291, in connect()
+>             rep(2, s.out)[:] @= rep(2, s.in1)
+HDL error: Cannot assign to Bits16: immutable Bits16.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 301, in connect()
+>             rep(0, s.out)[:] @= s.in1
+HDL error: Cannot directly access an empty signal bundle.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 317, in connect_out()
+>             s.out @= s.in1
+HDL error: Multiple drivers are not allowed for 'Wire'.
+- Calling one builder in another builder?
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 328, in connect()
+>             s.out @= s.in1; s.out @= s.in1  # noqa: E702
+HDL error: Only one '@=' assignment per line is allowed.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 339, in build_all()
+>             s.connect()
+HDL error: '@=' is only supported in builder methods tagged with @build.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 354, in connect()
+>             s.out @= s.in1.ext(s.in1)
+HDL error: ext() argument must be an integer.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 364, in connect()
+>             s.out @= s.in1.ext(1)
+HDL error: ext() argument must be greater than the current width 8.
+
+> File 'comopy-dev/comopy/hdl/tests/connectable_test.py', line 374, in connect()
+>             s.out @= s.in1.ext(-1)
+HDL error: ext() argument must be greater than the current width 8.
+
+==== I/O structure ====
+
+> File 'comopy-dev/comopy/hdl/tests/io_struct_test.py', line 106, in build_all()
+>             s.ports = s.Ports()
+HDL error: Cannot overwrite attribute 'node' of IOStruct.
+
+> File 'comopy-dev/comopy/hdl/tests/io_struct_test.py', line 117, in build_all()
+>             s.ports = s.Ports()
+HDL error: Non-directional member 'in1' in I/O structure 'Ports'.
+- In-out ports are not supported. Use PackedStruct to organize non-directional signals.
+- Use port() or flipped() to specify direction for nested IOStruct members.
+
+> File 'comopy-dev/comopy/hdl/tests/io_struct_test.py', line 132, in build_all()
+>             s.outer = s.Outer()
+HDL error: Non-directional member 'a' in I/O structure 'Outer'.
+- In-out ports are not supported. Use PackedStruct to organize non-directional signals.
+- Use port() or flipped() to specify direction for nested IOStruct members.
+
+> File 'comopy-dev/comopy/hdl/tests/io_struct_test.py', line 143, in build_all()
+>             s.ports = s.Ports()
+HDL error: Empty I/O structure 'Ports'.

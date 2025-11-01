@@ -1,0 +1,6 @@
+*.txt
+*.mlir
+*.sv
+*.diff
+
+build/
