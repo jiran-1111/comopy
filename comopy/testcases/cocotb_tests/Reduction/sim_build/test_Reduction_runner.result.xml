@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1768658545" />
+    <testcase name="test_Reduction" classname="test_Reduction_auto" file="/home/ranranrrr/comopy/comopy/testcases/cocotb_tests/Reduction/test_Reduction_auto.py" lineno="10" time="0.0008444786071777344" sim_time_ns="6000000000" ratio_time="7104975719932.241" />
+  </testsuite>
+</testsuites>

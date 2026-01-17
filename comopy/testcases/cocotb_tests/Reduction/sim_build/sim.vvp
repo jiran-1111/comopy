@@ -1,25 +1,25 @@
 #! /usr/bin/vvp
 :ivl_version "11.0 (stable)";
 :ivl_delay_selection "TYPICAL";
-:vpi_time_precision - 12;
+:vpi_time_precision + 0;
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
-S_0x557ac3b8fd90 .scope package, "$unit" "$unit" 2 1;
- .timescale -9 -12;
-S_0x557ac3b8ff20 .scope module, "Reduction" "Reduction" 3 1;
- .timescale -9 -12;
+S_0x55ecf1f14d90 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55ecf1f14f20 .scope module, "Reduction" "Reduction" 3 1;
+ .timescale 0 0;
     .port_info 0 /INPUT 8 "in_";
     .port_info 1 /OUTPUT 1 "parity";
-L_0x557ac3bd6ee0 .functor BUFZ 1, L_0x557ac3bd6de0, C4<0>, C4<0>, C4<0>;
-v0x557ac3ba1bd0_0 .net "__parity_bits", 0 0, L_0x557ac3bd6de0;  1 drivers
-o0x7f2b8285c048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
-v0x557ac3bd6c00_0 .net "in_", 7 0, o0x7f2b8285c048;  0 drivers
-v0x557ac3bd6ce0_0 .net "parity", 0 0, L_0x557ac3bd6ee0;  1 drivers
-L_0x557ac3bd6de0 .reduce/xor o0x7f2b8285c048;
+L_0x55ecf1f5bf20 .functor BUFZ 1, L_0x55ecf1f5be20, C4<0>, C4<0>, C4<0>;
+v0x55ecf1f26bd0_0 .net "__parity_bits", 0 0, L_0x55ecf1f5be20;  1 drivers
+o0x7f90fb7c0048 .functor BUFZ 8, C4<zzzzzzzz>; HiZ drive
+v0x55ecf1f5bc40_0 .net "in_", 7 0, o0x7f90fb7c0048;  0 drivers
+v0x55ecf1f5bd20_0 .net "parity", 0 0, L_0x55ecf1f5bf20;  1 drivers
+L_0x55ecf1f5be20 .reduce/xor o0x7f90fb7c0048;
 # The file index is used to find the file name in the following table.
 :file_names 4;
     "N/A";

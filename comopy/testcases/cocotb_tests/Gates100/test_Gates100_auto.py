@@ -8,33 +8,34 @@ import sys
 from pathlib import Path
 
 @cocotb.test()
-async def test_Reduction(dut):
+async def test_Gates100(dut):
     await Timer(1, units='step')
 
     vectors = [
-        (0, 0),
-        (1, 1),
-        (15, 0),
-        (255, 0),
-        (171, 1),
+        (0, 0, 0, 0),
+        (2882400254, 0, 1, 0),
+        (4294967295, 0, 1, 0),
+        (4581298449, 0, 1, 1),
     ]
 
     for vec in vectors:
         dut.in_.value = vec[0]
         await Timer(1, units='step')
-        assert dut.parity.value == vec[1]
+        assert dut.out_and.value == vec[1]
+        assert dut.out_or.value == vec[2]
+        assert dut.out_xor.value == vec[3]
 
 
-def test_Reduction_runner():
+def test_Gates100_runner():
     """Pytest entry point using cocotb-tools runner"""
     hdl_toplevel_lang = os.getenv("HDL_TOPLEVEL_LANG", "verilog")
     sim = os.getenv("SIM", "icarus")
     proj_path = Path(__file__).resolve().parent
 
     if hdl_toplevel_lang == "verilog":
-        sources = [proj_path / "Reduction.sv"]
+        sources = [proj_path / "Gates100.sv"]
     else:
-        sources = [proj_path / "Reduction.vhdl"]
+        sources = [proj_path / "Gates100.vhdl"]
 
     # 将当前路径加入搜索路径，确保 cocotb 能找到测试模块
     sys.path.append(str(proj_path))
@@ -42,13 +43,13 @@ def test_Reduction_runner():
     runner = get_runner(sim)
     runner.build(
         sources=sources,
-        hdl_toplevel="Reduction",
+        hdl_toplevel="Gates100",
         always=True,
     )
     runner.test(
-        hdl_toplevel="Reduction", 
-        test_module=f"test_Reduction_auto"
+        hdl_toplevel="Gates100", 
+        test_module=f"test_Gates100_auto"
     )
 
 if __name__ == "__main__":
-    test_Reduction_runner()
+    test_Gates100_runner()

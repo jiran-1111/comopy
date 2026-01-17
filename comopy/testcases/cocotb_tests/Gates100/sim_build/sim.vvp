@@ -1,0 +1,40 @@
+#! /usr/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2009.vpi";
+S_0x55f50c619d90 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55f50c619f20 .scope module, "Gates100" "Gates100" 3 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 100 "in_";
+    .port_info 1 /OUTPUT 1 "out_and";
+    .port_info 2 /OUTPUT 1 "out_or";
+    .port_info 3 /OUTPUT 1 "out_xor";
+L_0x55f50c674350 .functor BUFZ 1, L_0x55f50c6740d0, C4<0>, C4<0>, C4<0>;
+L_0x55f50c674410 .functor BUFZ 1, L_0x55f50c6741c0, C4<0>, C4<0>, C4<0>;
+L_0x55f50c6744d0 .functor BUFZ 1, L_0x55f50c6742b0, C4<0>, C4<0>, C4<0>;
+v0x55f50c641910_0 .net "__out_and_bits", 0 0, L_0x55f50c6740d0;  1 drivers
+v0x55f50c663a70_0 .net "__out_or_bits", 0 0, L_0x55f50c6741c0;  1 drivers
+v0x55f50c663b30_0 .net "__out_xor_bits", 0 0, L_0x55f50c6742b0;  1 drivers
+L_0x7f130f683018 .functor BUFT 1, C4<1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111>, C4<0>, C4<0>, C4<0>;
+v0x55f50c663bd0_0 .net/2u *"_ivl_0", 99 0, L_0x7f130f683018;  1 drivers
+o0x7f130f6cc0d8 .functor BUFZ 100, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0x55f50c663cb0_0 .net "in_", 99 0, o0x7f130f6cc0d8;  0 drivers
+v0x55f50c663d90_0 .net "out_and", 0 0, L_0x55f50c674350;  1 drivers
+v0x55f50c663e50_0 .net "out_or", 0 0, L_0x55f50c674410;  1 drivers
+v0x55f50c663f10_0 .net "out_xor", 0 0, L_0x55f50c6744d0;  1 drivers
+L_0x55f50c6740d0 .cmp/eq 100, o0x7f130f6cc0d8, L_0x7f130f683018;
+L_0x55f50c6741c0 .reduce/or o0x7f130f6cc0d8;
+L_0x55f50c6742b0 .reduce/xor o0x7f130f6cc0d8;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/home/ranranrrr/comopy/comopy/testcases/cocotb_tests/Gates100/Gates100.sv";
