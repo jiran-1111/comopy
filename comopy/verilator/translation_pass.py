@@ -9,7 +9,7 @@
 """
 Translate HDL circuit tree to SystemVerilog files."
 """
-
+# 把rawmodule电路树翻译成sv文件 放在dest_dir
 from comopy.hdl import CircuitNode, RawModule
 from comopy.translator import BaseTranslator
 from comopy.utils import BasePass

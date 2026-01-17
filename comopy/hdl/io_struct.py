@@ -18,7 +18,7 @@ from .circuit_object import CircuitObject, IODirection
 from .raw_module import RawModule
 from .signal import Signal
 
-
+# iostruct 电路端口结构
 class IOStruct(CircuitObject):
     """
     Structured I/O interface for module ports.

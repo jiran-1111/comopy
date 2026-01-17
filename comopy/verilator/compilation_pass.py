@@ -44,6 +44,7 @@ class CompilationPass(BasePass):
         self.top_module_name = type(self.top_module).__name__
         self.dest_dir = translator.dest_path.parent
         self.obj_dir = self.dest_dir / "obj_dir"
+        # 拿到sv文件 由translatorstage生成
         self.sv_files = list(self.dest_dir.glob("*.sv"))
         self.verilate()
         self.build_extension()
@@ -51,6 +52,7 @@ class CompilationPass(BasePass):
 
         return tree
 
+    # 调用verilator sv->c++模型
     def verilate(self):
         options = [
             "--cc",
@@ -95,6 +97,7 @@ class CompilationPass(BasePass):
         verilated_sources = sorted(self.obj_dir.glob("*.cpp"))
 
         # Create extension module
+        # 用pybind11编译python扩展模块 生成VYourModuleName.so
         ext_modules = [
             Pybind11Extension(
                 f"V{self.top_module_name}",
@@ -172,6 +175,7 @@ class CompilationPass(BasePass):
                 f"Multiple extension files found for '{ext_name}':"
                 f"\n  {files_str}"
             )
-
+        
+        # 创建VSimulator实例并挂到top模块上
         vsim = VSimulator(self.top_module, found_files[0])
         self.top_module.attach_vsimulator(vsim)

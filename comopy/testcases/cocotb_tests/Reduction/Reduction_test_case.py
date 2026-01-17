@@ -1,8 +1,8 @@
 import comopy.testcases.ex_HDLBits_features as ex
 from comopy.hdl import Input, IOStruct, Output
-from comopy.testcases.base_test_case import BaseTestCase
+from comopy.testcases.Cocotb_base_test_case import CocotbBaseTestCase
 
-class TestReduction(BaseTestCase):
+class TestReduction(CocotbBaseTestCase):
     class IO(IOStruct):
         in_ = Input(8)
         parity = Output()
@@ -10,7 +10,7 @@ class TestReduction(BaseTestCase):
     TV = [IO(), (0x00, 0), (0x01, 1), (0x0F, 0), (0xFF, 0), (0xAB, 1)]
 
     def test(self):
-        self.cocotb_simulate("Reduction", self.TV)
+        self.simulate(ex.Reduction(), self.TV)
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ from comopy.hdl import CircuitNode, RawModule, Wire
 from comopy.translator import BaseTranslator
 from comopy.utils import BasePass
 
-
+# 生成pybind11c++绑定代码
 def _width_to_vtype(nbits: int) -> str:
     assert nbits > 0
     assert nbits <= 64  # TODO >=64-bit need getter/setter methods

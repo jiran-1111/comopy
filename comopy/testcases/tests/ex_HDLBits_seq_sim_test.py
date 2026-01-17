@@ -13,8 +13,8 @@ class TestDff_raw(BaseTestCase):
         q = Output()
 
     TV = [
-        IO(),
-        (0, 1, None),
+        IO(),   # tv[0]:接口说明
+        (0, 1, None),   # 测试向量
         (1, 1, 1),
         (0, 0, 1),
         (1, 0, 0),
@@ -24,7 +24,7 @@ class TestDff_raw(BaseTestCase):
         (1, 1, 1),
     ]
 
-    def test_dff_raw(self):
+    def test_dff_raw(self): # simulate the dff raw module
         self.simulate(ex.Dff_raw(), self.TV)
 
 
