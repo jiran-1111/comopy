@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1768658607" />
-    <testcase name="test_Reduction" classname="test_Reduction_auto" file="/home/ranranrrr/comopy/comopy/testcases/cocotb_tests/Reduction/test_Reduction_auto.py" lineno="10" time="0.0008289813995361328" sim_time_ns="6000000000" ratio_time="7237798101811.907" />
+    <property name="random_seed" value="1768803249" />
+    <testcase name="test_Reduction" classname="test_Reduction_auto" file="/home/ranranrrr/comopy/comopy/testcases/cocotb_tests/Reduction/test_Reduction_auto.py" lineno="10" time="0.0008323192596435547" sim_time_ns="6000000000" ratio_time="7208772271555.429" />
   </testsuite>
 </testsuites>
