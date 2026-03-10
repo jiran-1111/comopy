@@ -15,7 +15,9 @@ from comopy.utils import JobPipeline, match_lines
 from cocotb_tools.runner import Runner, get_abs_path
 from comopy_tools.Runner_base_test_case import RunnerBaseTestCase
 import comopy.testcases.ex_HDLBits_features as ex
-
+from comopy_tools.signal import ComoPySignal
+from comopy_tools.dut import ComoPyDUT
+from comopy_tools.trigger import ComoPyTimer
 class ComoPy(Runner,RunnerBaseTestCase):
     def build(self, **kwargs: Any) -> None:
 
@@ -77,7 +79,7 @@ class ComoPy(Runner,RunnerBaseTestCase):
         with open(os.path.join(self.build_dir, "comopy_debug.log"), "w") as f:
             f.write(f"Build success! Top: {self.top}, Simulator: {self.simulator}")
         
-        # 物理检查
+        # 检查
         if hasattr(self.top, 'simulator'):
             print(f"✅ [DEBUG] Found simulator instance: {type(self.top.simulator)}")
             
@@ -87,9 +89,26 @@ class ComoPy(Runner,RunnerBaseTestCase):
             self.log.error("❌ ComoPy: self.top has NO simulator attribute!")
             self.log.debug(f"Available attributes: {dir(self.top)}")
             
-    # self.top.simulator 就是仿真器实例了，后续 cocotb 会调用它的接口进行仿真
+    # self.simulator 就是仿真器实例了，后续 cocotb 会调用它的接口进行仿真
+    """
+    hdl_toplevel="Gates100",
+        hdl_toplevel_lang="verilog",
+        test_module="cocotb_Gates100"
 
-     # --- 必须实现的抽象方法 (Abstract Methods) ---
+    """
+    def test(self, **kwargs):
+
+        dut = ComoPyDUT(self.top)
+        sim = self.simulator
+        sim.start()
+        
+
+        sim.stop()
+        
+
+    
+    
+    # --- 必须实现的抽象方法 (Abstract Methods) ---
 
 
     def _check_hdl_toplevel_lang(self, hdl_toplevel_lang):

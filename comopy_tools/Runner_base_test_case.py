@@ -15,22 +15,21 @@ class RunnerBaseTestCase:
 
     def simulate(
         self, top: HDL.RawModule, tv: list, init: dict[str, Any] = {}
-    ):
+    ) -> HDL.RawModule:
         # 空测试向量异常处理
         if not tv:
             raise RuntimeError(f"No TV for DUT module {top}.")
         # 获取测试向量的IO结构
-        io = self.__get_tv_io(tv)
+        io = self._get_tv_io(tv)
 
         pipeline = JobPipeline(HDLStage(), IRStage(), SimulatorStage())
         pipeline(top)
 
         # 端口一致性检查
-        self.__check_module_io(top, io)
+        self._check_module_io(top, io)
         # 初始化数据
-        self.__init_data(top, init)
-        # 运行仿真循环
-        self.__run_ticks(top, io, tv)
+        self._init_data(top, init)
+        return top
 
     # 第0行为IO模版
     def _get_tv_io(self, tv: list) -> HDL.IOStruct:

@@ -76,6 +76,7 @@ class BaseTestCase:
             # 把初始数据写入
             obj.read_mem(value)
 
+    # 用tv测试向量驱动dut 运行仿真 最后检查输出是否正确
     def __run_ticks(self, top: HDL.RawModule, io: HDL.IOStruct, tv: list):
         sim = top.simulator
         # isinstance是检查某个东西是不是某个类型的
