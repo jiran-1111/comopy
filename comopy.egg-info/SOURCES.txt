@@ -78,7 +78,6 @@ comopy/ir/tests/object_parser_test.py
 comopy/ir/tests/structure_pass_test.py
 comopy/simulator/__init__.py
 comopy/simulator/base_simulator.py
-comopy/simulator/cocotb_sim.py
 comopy/simulator/event_simulator.py
 comopy/simulator/scheduled_simulator.py
 comopy/simulator/setup_simulator.py
@@ -90,6 +89,7 @@ comopy/simulator/tests/scheduled_simulator_test.py
 comopy/simulator/tests/setup_simulator_test.py
 comopy/simulator/tests/simple_simulator_test.py
 comopy/simulator/tests/simulator_stage_test.py
+comopy/testcases/Cocotb_base_test_case.py
 comopy/testcases/__init__.py
 comopy/testcases/base_test_case.py
 comopy/testcases/checks.py
@@ -100,7 +100,10 @@ comopy/testcases/ex_HDLBits_no_conn.py
 comopy/testcases/ex_HDLBits_procedures.py
 comopy/testcases/ex_HDLBits_seq.py
 comopy/testcases/ex_inherit.py
-comopy/testcases/cocotb_tests/Gates100_test_case.py
+comopy/testcases/cocotb_tests/Gates100/Gates100_test_case.py
+comopy/testcases/cocotb_tests/Gates100/test_Gates100_auto.py
+comopy/testcases/cocotb_tests/Reduction/Reduction_test_case.py
+comopy/testcases/cocotb_tests/Reduction/test_Reduction_auto.py
 comopy/testcases/hdl/elem_array_test.py
 comopy/testcases/hdl/elem_instance_test.py
 comopy/testcases/hdl/elem_logic_test.py
@@ -161,3 +164,6 @@ comopy/verilator/translation_pass.py
 comopy/verilator/verilator_stage.py
 comopy/verilator/vsimulator.py
 comopy/verilator/tests/verilator_stage_test.py
+comopy_tools/__init__.py
+comopy_tools/launcher.py
+comopy_tools/runner.py
