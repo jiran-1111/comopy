@@ -200,3 +200,43 @@ class ComoPy(Runner, RunnerBaseTestCase):
         self.env["COCOTB_TOPLEVEL"] = self.sim_hdl_toplevel if hasattr(self, 'sim_hdl_toplevel') else self.hdl_toplevel
         self.env["TOPLEVEL_LANG"] = "python"
 
+# ---------------- 适配 Cocotb 2.0.1 get_runner 方法 ----------------
+"""
+def get_runner(simulator_name: str) -> Runner:
+    
+    扩展 Cocotb 2.0.1 get_runner：添加 comopy 仿真器支持
+    
+    # 先导入 Cocotb 原生 get_runner
+    from cocotb_tools.runner import get_runner as _cocotb_get_runner
+
+    # 自定义仿真器映射
+    custom_sims = {
+        "comopy": ComoPy,
+    }
+
+    # 优先处理自定义仿真器
+    if simulator_name.lower() in custom_sims:
+        return custom_sims[simulator_name.lower()]()
+    # 其他仿真器使用 Cocotb 原生实现
+    return _cocotb_get_runner(simulator_name)
+"""
+# ---------------- 测试示例（Cocotb 2.0.1 标准调用方式） ----------------
+if __name__ == "__main__":
+    # 1. 获取 ComoPy Runner 实例
+    runner = get_runner("comopy")
+    adder_path = [str(Path(__file__).parent /"model" / "adder.py")]
+    
+    try:
+        runner.build(
+            hdl_files=adder_path,  # 必须传入列表
+            toplevel="Adder"
+        )
+    except Exception as e:
+        print(f"运行失败：{type(e).__name__}: {e}")
+        # 打印详细的错误堆栈（方便调试）
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+    
+
+

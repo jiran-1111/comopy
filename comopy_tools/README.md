@@ -1,45 +1,32 @@
-在编写cocotb脚本的时（例如 run_test.py）中，需要多加一行 import comopy_tools：
+## comopy_tools
+基于 Cocotb 2.0.1 封装的 comopy 仿真适配器，用于在 Cocotb 生态中直接使用 Python 版 HDL 仿真。
 
-```Python
-import comopy_tools  # 这一行会自动完成“注册”
-from cocotb_tools.runner import get_runner # 正常加入get_runner
+### 文件作用
 
-def test_run():
-    # 现在你可以直接传 "comopy" 了！
-    runner = get_runner("comopy")
+- init.py 
     
-    runner.build(...)
-    runner.test(
-        hdl_toplevel="MyDesign",
-        test_module="test_script"
-    )
-```
+    全局扩展 Cocotb 的 get_runner，让系统支持 get_runner("comopy")。
 
+- runner.py 
 
-任务拆解：
+    实现新的Runner的子类 ComoPy 类，完整适配 Cocotb Runner 接口：
 
-1、get_runner
+    自动加载并解析 .py 格式 HDL 文件
 
-给cocotb打个补丁
+    自动生成 IO 结构体
 
-2、build
+    调用仿真流程得到.simulator
 
-和basetestcase相似的使用方法
+- runner_base_test_case.py
 
-先把上面两个实现
+    提供底层仿真基类  RunnerBaseTestCase(类似原来的BaseTestCase)
 
-3、test 较为复杂
+    仿真入口 simulate()
 
-先看一下comopy的仿真信号是如何传递的
+    IO 与测试向量校验
 
+    寄存器初始化
 
-
-逻辑顺序：
-
-test包含一个cocotb测试脚本+一个comopy测试脚本
-
-
-comopy:的内容主要是sv模块的pyhton脚本 确定谁是input 谁是output
-
-
-cocotb:赋值，测试成功条件，确定模块
+- test_comopy.py
+    
+    使用测试，直接运行即可测试加法器仿真。hdl文件位于/debug/model/adder.py

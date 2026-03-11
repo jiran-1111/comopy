@@ -299,8 +299,8 @@ class Logic(Signal):
 # I/O ports cannot be used in PackagedStruct/Union, and therefore do not
 # support 'link' argument.
 # NOTE: In CIRCT, ports only support 'wire' type, instead of 'logic'.
-def Input(Type: int | ParamConst = 1) -> Wire:
-    return Wire(Type).input()
+def Input(Type: int | ParamConst = 1) -> Wire:# 创建一个wire类型的信号并设置为输入
+    return Wire(Type).input() # 会把wire._direction = IODirection.In
 
 
 def Output(Type: int | ParamConst = 1) -> Wire:
