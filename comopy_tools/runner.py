@@ -1,11 +1,13 @@
 import os
 import re
 import sys
+import asyncio
 import importlib
 import shutil
 from pathlib import Path
 from typing import Any, List, Dict, Optional, Union, Sequence, Mapping, TextIO
-
+from adapter import ComopyDUT, RisingEdge, ComopySignal
+from comopy.simulator import BaseSimulator, SimulatorStage
 # ---------------- 正确导入 Cocotb 2.0.1 Runner ----------------
 try:
     import cocotb
@@ -44,6 +46,7 @@ class ComoPy(Runner, RunnerBaseTestCase):
         self._io_instance: Optional[IOStruct] = None     
         self.top = None  
         self.io = None  # 确保类型为 IOStruct
+        self.dut = None
         self.tv = []
 
     # ---------------- 实现 Runner 抽象方法 ----------------
@@ -124,7 +127,9 @@ class ComoPy(Runner, RunnerBaseTestCase):
         self.top = top_cls()  
         self.tv = [self.io]  # TV第一个元素必须是IOStruct实例
         self.top = self.simulate(self.top, self.tv, init)
-        
+        # ✅ 创建适配器 DUT
+        self.dut = ComopyDUT(self)
+
         # 7. 模拟器验证
         if hasattr(self.top, 'simulator') and self.top.simulator is not None:
             sim_type = self.top.simulator.__class__.__name__
@@ -140,6 +145,22 @@ class ComoPy(Runner, RunnerBaseTestCase):
             if hasattr(self.top, 'simulator'):
                 print(f"  - simulator 属性值：{self.top.simulator}")
 
+    
+    def test(self, test_func):
+
+        sim = self.top.simulator
+        assert isinstance(self.top, HDL.RawModule)
+        assert isinstance(sim, BaseSimulator)
+        sim.start()
+            
+        # 4. ✅ 运行用户的 cocotb 测试（修复版）
+        asyncio.run(test_func(self.dut))
+
+        # 5. 结束
+        sim.stop()
+        print("✅ 仿真完成！")
+
+
     def _parse_ports_from_text(self, file_content: str) -> dict:
         """解析端口定义（修复Python3.10转义警告）"""
         # 关键修复：用[.]替代\.，避免转义警告，同时不影响匹配
@@ -153,7 +174,7 @@ class ComoPy(Runner, RunnerBaseTestCase):
    
     def _generate_io_class(self, port_defs: dict) -> type:
         """
-        核心修复：直接生成IO类（而非代码字符串），确保继承自IOStruct
+        核心修复：直接生成IO类，确保继承自IOStruct
         :return: 继承自 IOStruct 的 IO 类
         """
         # 定义IO类的属性字典
