@@ -1,4 +1,3 @@
-
 from typing import Any
 
 import comopy.hdl as HDL
