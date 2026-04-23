@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1776954445" />
+    <testcase name="test_Andgate" classname="test_Andgate_auto" file="/home/ranrr/comopy/comopy/testcases/compare_test/Andgate/test_Andgate_auto.py" lineno="11" time="0.0002949237823486328" sim_time_ns="0.005" ratio_time="16.953532740501213" />
+  </testsuite>
+</testsuites>

@@ -89,7 +89,7 @@ class ComoPy(Runner, RunnerBaseTestCase):
         新版：不再自动解析端口！
         直接使用 adder.py 里你手写的 IO 类！
         """
-        # 1. 基础检查
+        # 基础检查
         if not isinstance(hdl_files, list) or len(hdl_files) == 0:
             raise ValueError("hdl_files 必须是非空列表")
         
@@ -100,41 +100,33 @@ class ComoPy(Runner, RunnerBaseTestCase):
         file_path = str(file_path_obj)
         top_module_name = toplevel
 
-        # 2. 动态导入硬件文件（adder.py）
+        # 动态导入硬件文件（adder.py）
         module_name = os.path.splitext(os.path.basename(file_path))[0]
         spec = importlib.util.spec_from_file_location(module_name, file_path)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
 
-        # 3. 拿到顶层模块 Adder
+        # 拿到顶层模块 Adder
         top_cls = getattr(module, top_module_name, None)
         if top_cls is None:
             raise RuntimeError(f"找不到模块 {top_module_name}")
-
-        # 4. 🔥 直接拿你手写的 IO 类！！！
-        if not hasattr(module, "IO"):
-            raise RuntimeError("你必须在硬件文件中手写 class IO(IOStruct)！")
         
         IOClass = module.IO
-        if not issubclass(IOClass, IOStruct):
-            raise RuntimeError("IO 必须继承自 IOStruct")
 
-        # 5. 创建 IO 实例
+        # 创建 IO 实例
         self.io = IOClass()
-        print(f"✅ 使用你手写的 IO 类：{IOClass}")
 
-        print(f"🔥 你的真实端口列表：{[attr for attr in dir(self.io) if not attr.startswith('_')]}")
-        # 6. 实例化硬件
+        # 实例化硬件
         self.top = top_cls()
         self.tv = [self.io]
         self.top = self.simulate(self.top, self.tv, init)
 
-        # 7. 创建 DUT
+        # 创建 DUT
         self.dut = ComopyDUT(self)
 
         # 状态输出
         if hasattr(self.top, 'simulator'):
-            print(f"✅ 最终模拟器：{self.top.simulator.__class__.__name__}")
+            print(f"最终模拟器：{self.top.simulator.__class__.__name__}")
     # ---------------- 运行测试 ----------------
 
     
@@ -158,11 +150,11 @@ class ComoPy(Runner, RunnerBaseTestCase):
 
         # 批量运行
         for t in tests:
-            print(f"\n▶ 运行测试: {t.__name__}")
+            print(f"\n运行测试: {t.__name__}")
             asyncio.run(t(self.dut))
 
         sim.stop()
-        print("\n✅ 全部测试完成！")
+        print("\n全部测试完成！")
     
 
     """

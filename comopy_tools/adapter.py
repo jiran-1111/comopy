@@ -14,7 +14,7 @@ class ComopyDUT:
         self.signal_list = [0] * len(self.io._part_names)
         # 保存模块所有端口名称（例如 ["A", "B", "X"]）
         self.port_names = self.io._part_names
-        print("🔥 你的真实端口列表：", self.port_names)
+
 
     def __getattr__(self, port_name):
         # 返回一个信号包装对象，绑定当前DUT和端口名

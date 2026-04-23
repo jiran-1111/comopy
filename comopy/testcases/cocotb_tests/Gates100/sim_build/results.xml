@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1776953849" />
+    <testcase name="test_Gates100" classname="test_Gates100_auto" file="/home/ranrr/comopy/comopy/testcases/cocotb_tests/Gates100/test_Gates100_auto.py" lineno="10" time="0.0005052089691162109" sim_time_ns="5000000000" ratio_time="9896894761680.037" />
+  </testsuite>
+</testsuites>

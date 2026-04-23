@@ -14,7 +14,7 @@ async def test_adder_1(dut):
     dut.B.value = 10
     await RisingEdge(dut.A)
     assert dut.X.value == 15
-    print("✅ 测试1：5 + 10 = 15 成功")
+    print("测试1：5 + 10 = 15 成功")
 
 # 测试用例2
 @cocotb.test()
@@ -23,7 +23,7 @@ async def test_adder_2(dut):
     dut.B.value = 0
     await RisingEdge(dut.A)
     assert dut.X.value == 0
-    print("✅ 测试2：0 + 0 = 0 成功")
+    print("测试2：0 + 0 = 0 成功")
 
 if __name__ == "__main__":
     from cocotb_tools.runner import get_runner
@@ -37,7 +37,7 @@ if __name__ == "__main__":
             toplevel="Adder"
         )
 
-        # ✅ 完全对齐
+
         runner.test(test_module="test_new_adder")
 
     except Exception as e:

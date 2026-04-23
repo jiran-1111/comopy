@@ -14,7 +14,7 @@ async def test_adder(dut):
     await RisingEdge(dut.A)
    
     assert dut.X.value == 15
-    print("✅ 测试成功！5 + 10 = 15！！！")
+    print("测试成功！5 + 10 = 15")
 
 if __name__ == "__main__":
     import comopy_tools
@@ -29,8 +29,6 @@ if __name__ == "__main__":
             toplevel="Adder"
         )
         
-        # TODO: test_module 在这个模块找到所有@cocotb.test()并依次执行
-        # ✅ 这里必须写模块名：test_adder（无 .py）
         runner.test(test_module = "test_adder")
 
     except Exception as e:

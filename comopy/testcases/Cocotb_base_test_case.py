@@ -45,7 +45,7 @@ class CocotbBaseTestCase():
 
         out_dir = os.path.join(
             os.path.dirname(__file__),
-            "cocotb_tests",
+            "compare_test",
             top.__class__.__name__
         )
         os.makedirs(out_dir, exist_ok=True)
@@ -175,7 +175,7 @@ class CocotbBaseTestCase():
     def _generate_cocotb_test(self, top: str, ports: list, vectors: list, use_runner: bool = True) -> None:
         out_dir = os.path.join(
             os.path.dirname(__file__),
-            "cocotb_tests",top
+            "compare_test",top
         )
         os.makedirs(out_dir, exist_ok=True)
 
